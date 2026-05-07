@@ -1,7 +1,7 @@
-# PM Ask → Tech Spec → Code Change Skill
+# CCA Co-Dev: Spec and Build
 
 ## Purpose
-Guide Copilot CLI through a structured, repeatable workflow when receiving a new PM feature ask — from understanding the ask all the way to a validated code change and tech spec.
+Guide Copilot CLI through a structured, repeatable workflow specifically for CCA (Case Closure Agent) feature development — from understanding a PM ask all the way to a validated code change and tech spec. Scoped to the Service Intelligence (Si) repo and its companion repos (CRM.CS.ModernAdmin, CRM.Solutions.ServiceIntelligence).
 
 ## Workflow
 
@@ -23,14 +23,15 @@ Before exploring the codebase:
 - Summarize relevant findings to the user before proceeding
 
 ### Step 3 — Review the Codebase
-Explore all relevant layers:
-- **Backend plugins** (C# sandbox plugins, repositories, helpers, constants)
-- **Frontend controls** (React/TypeScript PCF controls)
-- **Admin portal** (Modern Admin repo if applicable)
-- **Shared libraries** (ServiceIntelligenceCommon, proxies, constants)
+Explore ALL relevant repos and layers — do not stop at just one repo:
+- **Backend plugins** (`msdyn_CaseManagementIntelligence` — C# sandbox plugins, repositories, helpers, constants)
+- **Frontend controls** (`msdyn_CSIntelligence/Controls` — React/TypeScript PCF controls)
+- **Admin portal** (`CRM.CS.ModernAdmin` — always check this too, UI behavior may differ from backend)
+- **Shared libraries** (ServiceIntelligenceCommon, proxies, constants, option sets)
 - Map the full flow: entry gate → rule matching → action → response handling
-- Identify all FCS flags that gate the relevant feature
+- Identify all FCS flags that gate the relevant feature — check if they are **global or per-org**
 - Identify schema (entity fields, option sets) relevant to the ask
+- Always check edge cases: what happens after case closes? OOF emails? Status transitions?
 
 ### Step 4 — Generate Tech Plan
 Produce a structured plan covering:
@@ -105,6 +106,11 @@ After implementation:
 ## Key Rules
 - **Never skip Step 2 (session history)** — we have deep history on this codebase, use it
 - **Never skip Step 5 (rubber duck)** — catches design flaws before they become bugs
-- **Always confirm stakeholder dependencies early** — CSS approval and FCS flags are common blockers
+- **Always check both backend AND admin portal repos** — UI behavior often differs from backend, missing one leads to wrong conclusions
+- **Always confirm if FCS flags are global or per-org** before proposing them as solutions — global FCS cannot selectively enable features for one org
+- **Always confirm stakeholder dependencies early** — CSS approval and FCS flags are common blockers discovered too late
 - **Always validate plan against code before speccing** — specs based on assumptions waste everyone's time
+- **Always check edge cases** — post-closure behavior, OOF emails, status transitions, multi-org impact
+- **ADO work items should be business-focused** — match the style of existing samples, avoid over-engineering the format
+- **State findings with confidence** — when verified in code, do not hedge with "based on my understanding"
 - **One question at a time to PM** — never bundle multiple questions

@@ -6,7 +6,7 @@ A collection of reusable Copilot CLI skills for engineering workflows in Dynamic
 
 | Skill | Description |
 |---|---|
-| `pm-to-spec` | End-to-end workflow: PM ask → codebase review → tech plan → tech spec → code change |
+| `CCA-co-dev-spec-and-build` | End-to-end CCA feature development workflow: PM ask → codebase review → tech plan → tech spec → code change |
 
 ## How to Use
 
