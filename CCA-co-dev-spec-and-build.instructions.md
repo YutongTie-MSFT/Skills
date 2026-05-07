@@ -84,19 +84,29 @@ Write a formal tech spec covering:
 - Test plan
 - Out of scope
 
-### Step 10 — Code Change
+### Step 10 — PM Confirmation & Partner Team Approval
+Before writing any code:
+- Share the finalized tech spec with the PM and get explicit sign-off
+- Identify all partner teams affected by the change (CSS, SxG, CXA, other feature teams)
+- Share the proposed change with partner teams and get their approval
+- Confirm CSS approval if the change affects workspace settings or admin portal behavior
+- Confirm FCS flag enablement path and ownership
+- Document all approvals received before proceeding
+- **Do NOT start coding until all approvals are in place**
+
+### Step 11 — Code Change
 Implement the change:
 - Follow existing code patterns and style
 - Make surgical, minimal changes
 - Add telemetry logging consistent with existing patterns
 - Update constants files if new keys are introduced
 
-### Step 11 — Write Tests
+### Step 12 — Write Tests
 - Add or update unit tests for all changed logic
 - Verify existing tests still pass
 - Cover edge cases identified during rubber duck review
 
-### Step 12 — Update Tech Spec
+### Step 13 — Update Tech Spec
 After implementation:
 - Update the spec to reflect any decisions made during coding
 - Document any deviations from the original plan and why
